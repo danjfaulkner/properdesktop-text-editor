@@ -18,10 +18,10 @@
 
 #include <cmath>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 using namespace std::chrono_literals;
-using cutefish::i18n::format;
-using cutefish::i18n::tr;
+using properdesktop::i18n::format;
+using properdesktop::i18n::tr;
 
 // From the editor's edges, as the other margins of the window.
 static constexpr double cardInset = 12;
@@ -354,7 +354,7 @@ void EditorPage::onLoaded()
     m_pendingLine.reset();
     m_document->setCursor({line, 0});
     m_document->revealCursor();
-    cutefish::base::EventLoop::current()->post([this, alive = std::weak_ptr<bool>(m_alive)] {
+    properdesktop::base::EventLoop::current()->post([this, alive = std::weak_ptr<bool>(m_alive)] {
         if (!alive.expired())
             m_editor->ensureCursorVisible(true);
     });

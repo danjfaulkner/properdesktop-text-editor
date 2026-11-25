@@ -16,7 +16,7 @@
 #include <string>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class Label;
 class Menu;
 class ProgressBar;
@@ -26,19 +26,19 @@ class Document;
 class EditorPage;
 
 // A text field that hands Return, Shift+Return and Escape to its owner.
-class CardField : public cutefish::ui::TextField
+class CardField : public properdesktop::ui::TextField
 {
 public:
     std::function<void(bool shift)> onReturn;
     std::function<void()> onEscape;
 
 protected:
-    bool keyPress(const cutefish::ui::KeyEvent &event) override;
+    bool keyPress(const properdesktop::ui::KeyEvent &event) override;
 };
 
 // One line under the text: where the cursor is, and the document's
 // indentation, language, line endings and encoding, each a menu to change it.
-class StatusBar : public cutefish::ui::View
+class StatusBar : public properdesktop::ui::View
 {
 public:
     explicit StatusBar(EditorPage &page);
@@ -46,19 +46,19 @@ public:
 
     // The document or the view changed what the bar shows.
     void update();
-    void openEncodingMenu(cutefish::ui::PointF windowPosition);
+    void openEncodingMenu(properdesktop::ui::PointF windowPosition);
 
-    cutefish::ui::SizeF sizeHint() const override { return {0, 28}; }
+    properdesktop::ui::SizeF sizeHint() const override { return {0, 28}; }
 
 protected:
     void layout() override;
-    void paint(cutefish::ui::Painter &painter) override;
+    void paint(properdesktop::ui::Painter &painter) override;
 
 private:
     RoundButton *addItem(const std::string &name);
-    void openIndentMenu(cutefish::ui::PointF position);
-    void openLanguageMenu(cutefish::ui::PointF position);
-    void openLineEndingMenu(cutefish::ui::PointF position);
+    void openIndentMenu(properdesktop::ui::PointF position);
+    void openLanguageMenu(properdesktop::ui::PointF position);
+    void openLineEndingMenu(properdesktop::ui::PointF position);
 
     EditorPage &m_page;
     RoundButton *m_position;
@@ -69,12 +69,12 @@ private:
     RoundButton *m_lineEnding;
     RoundButton *m_encoding;
     std::vector<RoundButton *> m_items;
-    std::unique_ptr<cutefish::ui::Menu> m_menu;
+    std::unique_ptr<properdesktop::ui::Menu> m_menu;
 };
 
 // A problem with the document, shown above its text with what can be done
 // about it: changed or deleted on disk, unreadable characters, permissions.
-class InfoBar : public cutefish::ui::View
+class InfoBar : public properdesktop::ui::View
 {
 public:
     explicit InfoBar(EditorPage &page);
@@ -86,13 +86,13 @@ public:
 
 protected:
     void layout() override;
-    void paint(cutefish::ui::Painter &painter) override;
+    void paint(properdesktop::ui::Painter &painter) override;
 
 private:
     bool warning() const;
 
     EditorPage &m_page;
-    cutefish::ui::Label *m_label;
+    properdesktop::ui::Label *m_label;
     std::vector<TextButton *> m_buttons;
     std::vector<std::function<void()>> m_actions;
     std::string m_message;
@@ -132,7 +132,7 @@ private:
     bool m_inSelection = false;
     RoundButton *m_disclosure;
     CardField *m_field;
-    cutefish::ui::Label *m_count;
+    properdesktop::ui::Label *m_count;
     RoundButton *m_caseToggle;
     RoundButton *m_wordsToggle;
     RoundButton *m_regexToggle;
@@ -143,7 +143,7 @@ private:
     CardField *m_replaceField;
     TextButton *m_replace;
     TextButton *m_replaceAll;
-    cutefish::base::Timer m_wrapped;
+    properdesktop::base::Timer m_wrapped;
 };
 
 // "Line" or "line:column" in a small card where the find card floats; Enter
@@ -174,7 +174,7 @@ private:
 };
 
 // "Opening …", its progress and Cancel, over the editor while a file loads.
-class LoadingView : public cutefish::ui::View
+class LoadingView : public properdesktop::ui::View
 {
 public:
     explicit LoadingView(EditorPage &page);
@@ -187,8 +187,8 @@ protected:
 
 private:
     EditorPage &m_page;
-    cutefish::ui::Label *m_label;
-    cutefish::ui::ProgressBar *m_progress;
+    properdesktop::ui::Label *m_label;
+    properdesktop::ui::ProgressBar *m_progress;
     TextButton *m_cancel;
 };
 

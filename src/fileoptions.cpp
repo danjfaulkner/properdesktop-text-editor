@@ -7,7 +7,7 @@
 
 #include <map>
 
-namespace strings = cutefish::base::strings;
+namespace strings = properdesktop::base::strings;
 
 std::optional<Indentation> FileOptions::detectIndentation(const std::vector<std::string> &lines)
 {

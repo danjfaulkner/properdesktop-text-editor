@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class AboutDialog;
 class FileChooser;
 class HeaderButton;
@@ -38,7 +38,7 @@ public:
     {
         // A tab pulled out of another window, which this window opens with.
         std::unique_ptr<EditorPage> detachedPage;
-        cutefish::ui::SizeF size;
+        properdesktop::ui::SizeF size;
         double zoom = 1;
         bool restoresSize = true;
     };
@@ -50,12 +50,12 @@ public:
     EditorWindow &operator=(const EditorWindow &) = delete;
 
     EditorApplication &application() const { return m_application; }
-    cutefish::ui::Window &window() const { return *m_window; }
+    properdesktop::ui::Window &window() const { return *m_window; }
 
     // Zoom is per window and not kept.
     double zoom() const { return m_zoom; }
     void zoomBy(int step);
-    cutefish::ui::FontSpec editorFont() const;
+    properdesktop::ui::FontSpec editorFont() const;
 
     EditorPage *currentPage() const;
     int currentIndex() const { return m_currentIndex; }
@@ -93,22 +93,22 @@ public:
     void openDialog();
 
     // Copy Path, Show in Folder and Close Tab.
-    void openTabMenu(int index, cutefish::ui::PointF position);
+    void openTabMenu(int index, properdesktop::ui::PointF position);
     void showPreferences();
     void showAbout();
     void showNotification(const std::string &text, int milliseconds);
 
     void insertTab(std::unique_ptr<EditorPage> page, int index);
     std::unique_ptr<EditorPage> takePage(int index);
-    void detachTab(int index, cutefish::ui::PointF position);
+    void detachTab(int index, properdesktop::ui::PointF position);
     // The page this window was carried with, taken by the tab bar it was dropped on.
     std::unique_ptr<EditorPage> takeDetachedPage();
 
     bool isFullScreen() const;
     void toggleFullScreen();
 
-    cutefish::ui::WindowTabBar *tabBar() const;
-    cutefish::ui::View *headerContent() const;
+    properdesktop::ui::WindowTabBar *tabBar() const;
+    properdesktop::ui::View *headerContent() const;
 
     // The preferences changed.
     void applySettings();
@@ -131,26 +131,26 @@ private:
 
     EditorApplication &m_application;
     // The window shows it until the window goes, so it outlives the window.
-    std::unique_ptr<cutefish::ui::Menu> m_mainMenu;
-    std::unique_ptr<cutefish::ui::Window> m_window;
+    std::unique_ptr<properdesktop::ui::Menu> m_mainMenu;
+    std::unique_ptr<properdesktop::ui::Window> m_window;
     Content *m_content = nullptr;
     HeaderContent *m_header = nullptr;
     std::vector<EditorPage *> m_pages;
-    std::vector<cutefish::base::Subscription> m_pageConnections;
+    std::vector<properdesktop::base::Subscription> m_pageConnections;
     int m_currentIndex = -1;
     double m_zoom = 1;
     bool m_closeConfirmed = false;
 
-    std::unique_ptr<cutefish::ui::Menu> m_tabMenu;
+    std::unique_ptr<properdesktop::ui::Menu> m_tabMenu;
     int m_tabMenuIndex = -1;
-    std::unique_ptr<cutefish::ui::FileChooser> m_openChooser;
-    std::unique_ptr<cutefish::ui::FileChooser> m_saveChooser;
+    std::unique_ptr<properdesktop::ui::FileChooser> m_openChooser;
+    std::unique_ptr<properdesktop::ui::FileChooser> m_saveChooser;
     std::unique_ptr<SaveChangesDialog> m_saveDialog;
     std::unique_ptr<PreferencesDialog> m_preferences;
-    std::unique_ptr<cutefish::ui::AboutDialog> m_about;
-    std::unique_ptr<cutefish::ui::Toast> m_toast;
-    std::vector<cutefish::base::Subscription> m_connections;
-    cutefish::base::Subscription m_languageChanged;
+    std::unique_ptr<properdesktop::ui::AboutDialog> m_about;
+    std::unique_ptr<properdesktop::ui::Toast> m_toast;
+    std::vector<properdesktop::base::Subscription> m_connections;
+    properdesktop::base::Subscription m_languageChanged;
     std::shared_ptr<bool> m_alive = std::make_shared<bool>(true);
 };
 

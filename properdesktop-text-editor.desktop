@@ -5,7 +5,7 @@
 Version=1.0
 Name=Text Editor
 Comment=Edit plain text files
-Exec=cutefish-text-editor %U
+Exec=properdesktop-text-editor %U
 Icon=accessories-text-editor
 Terminal=false
 Type=Application
@@ -17,4 +17,4 @@ Actions=new-window;
 
 [Desktop Action new-window]
 Name=New Window
-Exec=cutefish-text-editor --new-window
+Exec=properdesktop-text-editor --new-window

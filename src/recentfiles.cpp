@@ -25,7 +25,7 @@ static std::vector<std::string> existing(const std::vector<std::string> &paths)
 RecentFiles::RecentFiles(const std::string &settingsFile)
     : m_settingsFile(settingsFile)
 {
-    const cutefish::base::Settings settings(m_settingsFile);
+    const properdesktop::base::Settings settings(m_settingsFile);
     m_files = existing(settings.stringListValue(filesKey));
     if (m_files.size() > maximumFiles)
         m_files.resize(maximumFiles);
@@ -56,7 +56,7 @@ void RecentFiles::clear()
 
 void RecentFiles::write()
 {
-    cutefish::base::Settings settings(m_settingsFile);
+    properdesktop::base::Settings settings(m_settingsFile);
     if (m_files.empty())
         settings.remove(filesKey);
     else

@@ -12,20 +12,20 @@
 // variant that follow the system appearance.
 struct SyntaxTheme
 {
-    cutefish::ui::Color background;
-    cutefish::ui::Color text;
-    cutefish::ui::Color gutterText;
-    cutefish::ui::Color currentLine;
-    cutefish::ui::Color selection;
-    cutefish::ui::Color match;
-    cutefish::ui::Color currentMatch;
-    cutefish::ui::Color bracket;
-    cutefish::ui::Color whitespace;
-    cutefish::ui::Color styles[int(SyntaxStyle::Count)];
+    properdesktop::ui::Color background;
+    properdesktop::ui::Color text;
+    properdesktop::ui::Color gutterText;
+    properdesktop::ui::Color currentLine;
+    properdesktop::ui::Color selection;
+    properdesktop::ui::Color match;
+    properdesktop::ui::Color currentMatch;
+    properdesktop::ui::Color bracket;
+    properdesktop::ui::Color whitespace;
+    properdesktop::ui::Color styles[int(SyntaxStyle::Count)];
 
-    static SyntaxTheme theme(bool dark, cutefish::ui::Color accent);
+    static SyntaxTheme theme(bool dark, properdesktop::ui::Color accent);
     // The background the theme gives the text area, which the window takes.
-    static cutefish::ui::Color windowBackground(bool dark);
+    static properdesktop::ui::Color windowBackground(bool dark);
 };
 
 #endif

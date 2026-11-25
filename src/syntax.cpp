@@ -16,8 +16,8 @@
 #include <unordered_set>
 #include <utility>
 
-using cutefish::i18n::tr;
-namespace strings = cutefish::base::strings;
+using properdesktop::i18n::tr;
+namespace strings = properdesktop::base::strings;
 
 struct WordHash
 {
@@ -442,7 +442,7 @@ const std::vector<const Language *> &Syntax::languages()
         std::vector<const Language *> result;
         for (const Language &language : allLanguages())
             result.push_back(&language);
-        const cutefish::base::Locale &locale = cutefish::base::Locale::system();
+        const properdesktop::base::Locale &locale = properdesktop::base::Locale::system();
         std::stable_sort(result.begin(), result.end(), [&locale](const Language *a, const Language *b) {
             return locale.compare(a->name, b->name) < 0;
         });
@@ -526,10 +526,10 @@ std::string Syntax::detect(const std::string &fileName, std::string_view firstLi
         return "diff";
 
     if (!base.empty()) {
-        const std::string mime = cutefish::base::mime::typeForFileName(base);
+        const std::string mime = properdesktop::base::mime::typeForFileName(base);
         for (const Language &language : allLanguages()) {
             for (const std::string &type : language.mimeTypes) {
-                if (cutefish::base::mime::inherits(mime, type))
+                if (properdesktop::base::mime::inherits(mime, type))
                     return language.id;
             }
         }

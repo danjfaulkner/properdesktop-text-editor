@@ -26,10 +26,10 @@
 #include <algorithm>
 #include <cmath>
 
-using namespace cutefish::ui;
-using cutefish::i18n::format;
-using cutefish::i18n::tr;
-using cutefish::i18n::trn;
+using namespace properdesktop::ui;
+using properdesktop::i18n::format;
+using properdesktop::i18n::tr;
+using properdesktop::i18n::trn;
 
 // Destroys a window from the event loop, after the event being handled.
 static void releaseLater(std::unique_ptr<Window> &window)
@@ -37,7 +37,7 @@ static void releaseLater(std::unique_ptr<Window> &window)
     if (!window)
         return;
     std::shared_ptr<Window> doomed(std::move(window));
-    cutefish::ui::Application::instance()->loop().post([doomed] {});
+    properdesktop::ui::Application::instance()->loop().post([doomed] {});
 }
 
 // One device pixel at any scale, snapped as a RoundedRectangle.
@@ -447,7 +447,7 @@ private:
     std::vector<std::string> m_families;
     std::vector<Card *> m_cards;
     std::vector<std::pair<Switch *, bool EditorSettings::*>> m_switches;
-    cutefish::base::Subscription m_connection;
+    properdesktop::base::Subscription m_connection;
 };
 
 PreferencesDialog::PreferencesDialog(Window *parent, EditorApplication &application)

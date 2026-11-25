@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cutefish-text-editor\n"
-"Report-Msgid-Bugs-To: https://github.com/cutefishos\n"
+"Project-Id-Version: properdesktop-text-editor\n"
+"Report-Msgid-Bugs-To: https://github.com/danjfaulkner\n"
 "POT-Creation-Date: 2026-11-18 15:15+0800\n"
 "PO-Revision-Date: 2026-11-13 12:00+0800\n"
 "Last-Translator: \n"
@@ -170,7 +170,7 @@ msgstr "Удалить"
 msgid "Select All"
 msgstr "Выбрать все"
 
-#: src/editorwindow.cpp cutefish-text-editor.desktop
+#: src/editorwindow.cpp properdesktop-text-editor.desktop
 msgid "Text Editor"
 msgstr "Текстовый редактор"
 
@@ -206,7 +206,7 @@ msgstr "Файл"
 msgid "New Tab"
 msgstr "Новая вкладка"
 
-#: src/editorwindow.cpp cutefish-text-editor.desktop
+#: src/editorwindow.cpp properdesktop-text-editor.desktop
 msgid "New Window"
 msgstr "Новое окно"
 
@@ -690,10 +690,10 @@ msgstr "Вьетнамская (Windows-1258)"
 msgid "Thai (Windows-874)"
 msgstr "Тайская (Windows-874)"
 
-#: cutefish-text-editor.desktop
+#: properdesktop-text-editor.desktop
 msgid "Edit plain text files"
 msgstr "Редактирование текстовых файлов"
 
-#: cutefish-text-editor.desktop
+#: properdesktop-text-editor.desktop
 msgid "Text;Editor;Plain;Notes;Code;"
 msgstr "Текст;Редактор;Блокнот;Заметки;Код;Text;Editor;"

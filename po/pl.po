@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cutefish-text-editor\n"
-"Report-Msgid-Bugs-To: https://github.com/cutefishos\n"
+"Project-Id-Version: properdesktop-text-editor\n"
+"Report-Msgid-Bugs-To: https://github.com/danjfaulkner\n"
 "POT-Creation-Date: 2026-11-18 15:15+0800\n"
 "PO-Revision-Date: 2026-11-13 15:22+0800\n"
 "Last-Translator: \n"
@@ -170,7 +170,7 @@ msgstr "Usuń"
 msgid "Select All"
 msgstr "Zaznacz wszystko"
 
-#: src/editorwindow.cpp cutefish-text-editor.desktop
+#: src/editorwindow.cpp properdesktop-text-editor.desktop
 msgid "Text Editor"
 msgstr "Edytor tekstu"
 
@@ -206,7 +206,7 @@ msgstr "Plik"
 msgid "New Tab"
 msgstr "Nowa karta"
 
-#: src/editorwindow.cpp cutefish-text-editor.desktop
+#: src/editorwindow.cpp properdesktop-text-editor.desktop
 msgid "New Window"
 msgstr "Nowe okno"
 
@@ -690,10 +690,10 @@ msgstr "Wietnamski (Windows-1258)"
 msgid "Thai (Windows-874)"
 msgstr "Tajski (Windows-874)"
 
-#: cutefish-text-editor.desktop
+#: properdesktop-text-editor.desktop
 msgid "Edit plain text files"
 msgstr "Edytuj pliki zwykłego tekstu"
 
-#: cutefish-text-editor.desktop
+#: properdesktop-text-editor.desktop
 msgid "Text;Editor;Plain;Notes;Code;"
 msgstr "Tekst;Edytor;Notatki;Kod;Notatnik;Text;Editor;Plain;"

@@ -21,7 +21,7 @@ public:
     void add(const std::string &path);
     void clear();
 
-    cutefish::base::Signal<> filesChanged;
+    properdesktop::base::Signal<> filesChanged;
 
 private:
     void write();

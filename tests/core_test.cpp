@@ -46,7 +46,7 @@ protected:
         std::error_code error;
         fs::create_directories(fs::path(file).parent_path(), error);
         std::string temporary = file + ".tmp";
-        if (!cutefish::base::file::writeAtomically(temporary, data))
+        if (!properdesktop::base::file::writeAtomically(temporary, data))
             return {};
         fs::rename(temporary, file, error);
         return file;
@@ -54,7 +54,7 @@ protected:
 
     static std::string readFile(const std::string &file)
     {
-        return cutefish::base::file::read(file).value_or(std::string("<missing>"));
+        return properdesktop::base::file::read(file).value_or(std::string("<missing>"));
     }
 
     static std::string encode(std::string_view text, const char *encoding)
@@ -628,7 +628,7 @@ TEST_F(CoreTest, TooLarge)
 {
     const std::string file = path("huge.bin");
     {
-        cutefish::base::file::TemporaryFile placeholder(TestSupport::directory());
+        properdesktop::base::file::TemporaryFile placeholder(TestSupport::directory());
         ASSERT_TRUE(placeholder.isValid());
         ASSERT_EQ(::ftruncate(placeholder.fd(), Document::maximumFileSize + 1), 0);
         fs::rename(placeholder.path(), file);
@@ -714,7 +714,7 @@ TEST_F(CoreTest, ChangedOnDiskIsRaisedOncePerChange)
     document.setCursor({0, 4});
     document.insertText(" mine");
     int raised = 0;
-    const cutefish::base::Subscription counting = document.noticeChanged.connect([&] {
+    const properdesktop::base::Subscription counting = document.noticeChanged.connect([&] {
         if (document.notice() == Document::ChangedOnDisk)
             ++raised;
     });
@@ -1040,7 +1040,7 @@ TEST_F(CoreTest, RecentFiles)
     const std::string b = writeFile("recent-b.txt", "b");
     const std::string gone = path("recent-deleted.txt");
     {
-        cutefish::base::Settings settings(store);
+        properdesktop::base::Settings settings(store);
         settings.setValue("Editor/wordWrap", false);
         settings.setValue("Recent/Files", std::vector<std::string>{gone});
     }
@@ -1058,7 +1058,7 @@ TEST_F(CoreTest, RecentFiles)
     EXPECT_TRUE(again.files().empty());
 
     // The rest of the settings file stays.
-    const cutefish::base::Settings settings(store);
+    const properdesktop::base::Settings settings(store);
     EXPECT_FALSE(settings.contains("Recent/Files"));
     EXPECT_FALSE(settings.boolValue("Editor/wordWrap", true));
 }

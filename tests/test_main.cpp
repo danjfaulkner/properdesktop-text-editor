@@ -16,7 +16,7 @@
 #include <filesystem>
 #include <poll.h>
 
-static cutefish::base::EventLoop *s_loop = nullptr;
+static properdesktop::base::EventLoop *s_loop = nullptr;
 static std::string s_directory;
 
 const std::string &TestSupport::directory()
@@ -31,7 +31,7 @@ void TestSupport::wait(int ms)
 
 bool TestSupport::waitUntil(const std::function<bool()> &done, int timeoutMs)
 {
-    cutefish::base::ElapsedTimer timer;
+    properdesktop::base::ElapsedTimer timer;
     timer.start();
     while (!done()) {
         const int64_t left = timeoutMs - timer.elapsedMs();
@@ -48,13 +48,13 @@ int main(int argc, char **argv)
 {
     ::testing::InitGoogleTest(&argc, argv);
 #ifdef TEXT_EDITOR_UI_TESTS
-    cutefish::ui::Application application(argc, argv, cutefish::ui::Application::Platform::Headless);
+    properdesktop::ui::Application application(argc, argv, properdesktop::ui::Application::Platform::Headless);
     s_loop = &application.loop();
 #else
-    cutefish::base::EventLoop loop;
+    properdesktop::base::EventLoop loop;
     s_loop = &loop;
 #endif
-    cutefish::base::file::TemporaryDirectory scratch(std::filesystem::temp_directory_path().string(), "text-editor-test");
+    properdesktop::base::file::TemporaryDirectory scratch(std::filesystem::temp_directory_path().string(), "text-editor-test");
     if (!scratch.isValid())
         return 1;
     s_directory = scratch.path();

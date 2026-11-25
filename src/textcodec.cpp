@@ -16,7 +16,7 @@
 #include <cstring>
 #include <memory>
 
-using cutefish::i18n::trNoop;
+using properdesktop::i18n::trNoop;
 
 // Enough bytes to judge a legacy encoding by; whole files can be large.
 static constexpr size_t sampleSize = 256 * 1024;
@@ -149,7 +149,7 @@ static std::string decodeLegacy(std::string_view data, UConverter *converter, bo
     }
     utf16.resize(size_t(length));
     *malformed = state.error;
-    return cutefish::base::strings::utf16ToUtf8(utf16);
+    return properdesktop::base::strings::utf16ToUtf8(utf16);
 }
 
 static bool decodesCleanly(const std::string &encoding, std::string_view sample)
@@ -279,7 +279,7 @@ static bool isDoubleByte(std::string_view encoding)
 
 std::string TextCodec::localeEncoding()
 {
-    return localeEncoding(cutefish::base::Locale::system().name());
+    return localeEncoding(properdesktop::base::Locale::system().name());
 }
 
 std::string TextCodec::localeEncoding(const std::string &localeName)
@@ -558,7 +558,7 @@ std::string TextCodec::encode(const std::vector<std::string> &lines, const std::
         return text;
     }
 
-    const std::u16string utf16 = cutefish::base::strings::utf8ToUtf16(text);
+    const std::u16string utf16 = properdesktop::base::strings::utf8ToUtf16(text);
     ConversionState state;
     UErrorCode status = U_ZERO_ERROR;
     ucnv_setFromUCallBack(converter.get(), fromUnicodeCallback, &state, nullptr, nullptr, &status);

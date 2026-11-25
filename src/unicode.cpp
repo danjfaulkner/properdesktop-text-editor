@@ -64,7 +64,7 @@ size_t Unicode::boundary(std::string_view text, size_t index)
 
 void Unicode::append(std::string &text, char32_t codePoint)
 {
-    cutefish::base::strings::appendUtf8(text, codePoint);
+    properdesktop::base::strings::appendUtf8(text, codePoint);
 }
 
 size_t Unicode::utf16Length(std::string_view text)
@@ -157,10 +157,10 @@ std::string Unicode::toLower(std::string_view text)
 
 std::string Unicode::sanitized(std::string_view text)
 {
-    return cutefish::base::strings::sanitizedUtf8(text);
+    return properdesktop::base::strings::sanitizedUtf8(text);
 }
 
 bool Unicode::isValid(std::string_view text)
 {
-    return cutefish::base::strings::isValidUtf8(text);
+    return properdesktop::base::strings::isValidUtf8(text);
 }

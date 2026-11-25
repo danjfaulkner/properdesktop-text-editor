@@ -19,12 +19,12 @@
 #include <algorithm>
 #include <filesystem>
 
-using cutefish::i18n::tr;
+using properdesktop::i18n::tr;
 namespace fs = std::filesystem;
-namespace strings = cutefish::base::strings;
-namespace dbus = cutefish::base::dbus;
+namespace strings = properdesktop::base::strings;
+namespace dbus = properdesktop::base::dbus;
 
-static constexpr const char *serviceName = "org.cutefish.TextEditor";
+static constexpr const char *serviceName = "org.properdesktop.TextEditor";
 static constexpr const char *servicePath = "/TextEditor";
 
 // Shown as it is, so a maximized window stays maximized.
@@ -51,16 +51,16 @@ EditorApplication::~EditorApplication()
     m_windows.clear();
 }
 
-static const std::vector<cutefish::ui::FontFamily> &families()
+static const std::vector<properdesktop::ui::FontFamily> &families()
 {
-    static const std::vector<cutefish::ui::FontFamily> list = cutefish::ui::fontFamilies();
+    static const std::vector<properdesktop::ui::FontFamily> list = properdesktop::ui::fontFamilies();
     return list;
 }
 
 std::vector<std::string> EditorApplication::monospaceFamilies() const
 {
     std::vector<std::string> result;
-    for (const cutefish::ui::FontFamily &family : families()) {
+    for (const properdesktop::ui::FontFamily &family : families()) {
         if (family.fixedPitch && !strings::startsWith(family.name, "."))
             result.push_back(family.name);
     }
@@ -120,7 +120,7 @@ void EditorApplication::releaseWindow(EditorWindow *window)
     // Destroyed after the event it closed in, which may be one of its own.
     std::shared_ptr<EditorWindow> doomed(std::move(*it));
     m_windows.erase(it);
-    cutefish::base::EventLoop::current()->post([doomed] {});
+    properdesktop::base::EventLoop::current()->post([doomed] {});
     windowCountChanged();
 }
 
@@ -202,8 +202,8 @@ void EditorApplication::open(const std::vector<std::string> &arguments, const st
                 continue;
             }
         }
-        const std::optional<std::string> local = cutefish::base::url::isLocalFile(argument)
-                ? cutefish::base::url::toLocalFile(argument)
+        const std::optional<std::string> local = properdesktop::base::url::isLocalFile(argument)
+                ? properdesktop::base::url::toLocalFile(argument)
                 : std::nullopt;
         pending.push_back(local ? *local : (directory / argument).lexically_normal().string());
         any = true;
@@ -252,7 +252,7 @@ void EditorApplication::quit()
 {
     m_quitting = true;
     // Later: this is called from handlers of the windows quitting closes.
-    cutefish::base::EventLoop::current()->post([] { cutefish::ui::Application::instance()->quit(); });
+    properdesktop::base::EventLoop::current()->post([] { properdesktop::ui::Application::instance()->quit(); });
 }
 
 void EditorApplication::showInFileManager(const std::string &path) const
@@ -261,10 +261,10 @@ void EditorApplication::showInFileManager(const std::string &path) const
     if (!bus)
         return;
     dbus::Proxy proxy(bus, "org.freedesktop.FileManager1", "/org/freedesktop/FileManager1", "org.freedesktop.FileManager1");
-    proxy.send("ShowItems", std::vector<std::string>{cutefish::base::url::fromLocalFile(path)}, std::string());
+    proxy.send("ShowItems", std::vector<std::string>{properdesktop::base::url::fromLocalFile(path)}, std::string());
 }
 
 void EditorApplication::copyText(const std::string &text) const
 {
-    cutefish::ui::Clipboard::setText(text);
+    properdesktop::ui::Clipboard::setText(text);
 }

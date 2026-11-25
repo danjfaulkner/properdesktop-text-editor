@@ -20,7 +20,7 @@
 #include <unordered_map>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class ScrollBar;
 }
 
@@ -48,7 +48,7 @@ private:
 // file of any size scrolls and types as fast as a short one. It scrolls
 // itself, with the shared touchpad physics, wheel steps and overlay scroll
 // bars.
-class EditorView : public cutefish::ui::View
+class EditorView : public properdesktop::ui::View
 {
 public:
     EditorView();
@@ -57,8 +57,8 @@ public:
     Document *document() const { return m_document; }
     void setDocument(Document *document);
     // The family empty takes the system's monospace font.
-    void setFont(const cutefish::ui::FontSpec &font);
-    const cutefish::ui::FontSpec &font() const { return m_font; }
+    void setFont(const properdesktop::ui::FontSpec &font);
+    const properdesktop::ui::FontSpec &font() const { return m_font; }
     bool wordWrap() const { return m_wordWrap; }
     void setWordWrap(bool wrap);
     bool lineNumbers() const { return m_lineNumbers; }
@@ -69,8 +69,8 @@ public:
     bool autoIndent() const { return m_autoIndent; }
     void setAutoIndent(bool indent);
     void setDarkMode(bool dark);
-    void setAccentColor(cutefish::ui::Color color);
-    cutefish::ui::Color backgroundColor() const { return m_theme.background; }
+    void setAccentColor(properdesktop::ui::Color color);
+    properdesktop::ui::Color backgroundColor() const { return m_theme.background; }
     void setSidePadding(double padding);
     // Scroll bars drawn for the text's background: light on a dark one.
     void setScrollBarDarkMode(bool dark);
@@ -87,14 +87,14 @@ public:
     double lineHeight() const { return m_lineHeight; }
     double gutterWidth() const;
     // In the view's coordinates.
-    cutefish::ui::RectF cursorRectangle() const { return m_caret; }
+    properdesktop::ui::RectF cursorRectangle() const { return m_caret; }
 
     void cut();
     void copy();
     void paste();
     void ensureCursorVisible(bool center = false);
     // The text position under a point of this view.
-    TextPosition positionAt(cutefish::ui::PointF point);
+    TextPosition positionAt(properdesktop::ui::PointF point);
     // Scrolls so `line` (from 0) is at the top, e.g. when wrapping changes.
     void scrollToLine(double line);
     double topLine() const;
@@ -104,37 +104,37 @@ public:
     // Lays out what is in view now, as a frame would; for tests.
     void updateNow();
 
-    cutefish::base::Signal<> optionsChanged;
-    cutefish::base::Signal<> metricsChanged;
-    cutefish::base::Signal<> scrolled;
-    std::function<void(cutefish::ui::PointF position)> onContextMenuRequested;
+    properdesktop::base::Signal<> optionsChanged;
+    properdesktop::base::Signal<> metricsChanged;
+    properdesktop::base::Signal<> scrolled;
+    std::function<void(properdesktop::ui::PointF position)> onContextMenuRequested;
     std::function<void(int step)> onZoomRequested;
     std::function<void(const std::vector<std::string> &paths)> onFilesDropped;
 
-    cutefish::ui::CursorShape cursorShape() const override;
+    properdesktop::ui::CursorShape cursorShape() const override;
     bool acceptsPointer() const override { return true; }
     bool acceptsFocus() const override { return true; }
 
 protected:
     void layout() override;
-    void paint(cutefish::ui::Painter &painter) override;
-    void pointerPress(const cutefish::ui::PointerEvent &event) override;
-    void pointerMove(const cutefish::ui::PointerEvent &event) override;
-    void pointerRelease(const cutefish::ui::PointerEvent &event) override;
-    void hoverMove(const cutefish::ui::PointerEvent &event) override;
-    bool keyPress(const cutefish::ui::KeyEvent &event) override;
-    bool scroll(const cutefish::ui::ScrollEvent &event) override;
-    bool gesture(const cutefish::ui::GestureEvent &event) override;
-    void focusIn(cutefish::ui::FocusReason reason) override;
+    void paint(properdesktop::ui::Painter &painter) override;
+    void pointerPress(const properdesktop::ui::PointerEvent &event) override;
+    void pointerMove(const properdesktop::ui::PointerEvent &event) override;
+    void pointerRelease(const properdesktop::ui::PointerEvent &event) override;
+    void hoverMove(const properdesktop::ui::PointerEvent &event) override;
+    bool keyPress(const properdesktop::ui::KeyEvent &event) override;
+    bool scroll(const properdesktop::ui::ScrollEvent &event) override;
+    bool gesture(const properdesktop::ui::GestureEvent &event) override;
+    void focusIn(properdesktop::ui::FocusReason reason) override;
     void focusOut() override;
     bool acceptsTextInput() const override;
-    cutefish::ui::TextInputState textInputState() const override;
-    void textInput(const cutefish::ui::TextInputEvent &event) override;
-    bool canDrop(const cutefish::ui::DropOffer &offer) const override;
-    void dragEnter(const cutefish::ui::DragEvent &event) override;
-    uint32_t dragUpdate(const cutefish::ui::DragEvent &event) override;
+    properdesktop::ui::TextInputState textInputState() const override;
+    void textInput(const properdesktop::ui::TextInputEvent &event) override;
+    bool canDrop(const properdesktop::ui::DropOffer &offer) const override;
+    void dragEnter(const properdesktop::ui::DragEvent &event) override;
+    uint32_t dragUpdate(const properdesktop::ui::DragEvent &event) override;
     void dragLeave() override;
-    uint32_t drop(const cutefish::ui::DragEvent &event) override;
+    uint32_t drop(const properdesktop::ui::DragEvent &event) override;
 
 private:
     class ScrollTarget;
@@ -177,8 +177,8 @@ private:
 
     struct Rect
     {
-        cutefish::ui::RectF rect;
-        cutefish::ui::Color color;
+        properdesktop::ui::RectF rect;
+        properdesktop::ui::Color color;
     };
 
     void onLinesChanged(int line, int removed, int added);
@@ -205,9 +205,9 @@ private:
 
     double lineTop(int line) const;
     bool locate(const TextPosition &position, LineCache **cache, const Segment **segment, int *textLine, int *visual);
-    cutefish::ui::RectF caretRect(const TextPosition &position);
-    TextPosition hitTest(cutefish::ui::PointF point);
-    std::vector<cutefish::ui::RectF> rangeRects(int line, LineCache *cache, int from, int to, bool toLineEnd);
+    properdesktop::ui::RectF caretRect(const TextPosition &position);
+    TextPosition hitTest(properdesktop::ui::PointF point);
+    std::vector<properdesktop::ui::RectF> rangeRects(int line, LineCache *cache, int from, int to, bool toLineEnd);
     void addWhitespaceMarks(int line, LineCache *cache);
     int columnInLayout(const LineCache *cache, const Segment &segment, const TextPosition &position) const;
 
@@ -224,11 +224,11 @@ private:
     void startTextDrag();
     // A text drag from this view may be copied or moved, a move unless the
     // keys pick a copy; other text is copied.
-    uint32_t textDropActions(const cutefish::ui::DropOffer *offer) const;
+    uint32_t textDropActions(const properdesktop::ui::DropOffer *offer) const;
 
     Document *m_document = nullptr;
-    std::vector<cutefish::base::Subscription> m_connections;
-    cutefish::ui::FontSpec m_font;
+    std::vector<properdesktop::base::Subscription> m_connections;
+    properdesktop::ui::FontSpec m_font;
     std::shared_ptr<CodeFont> m_codeFont;
     bool m_wordWrap = true;
     bool m_lineNumbers = true;
@@ -237,7 +237,7 @@ private:
     bool m_matchBrackets = true;
     bool m_autoIndent = true;
     bool m_dark = false;
-    cutefish::ui::Color m_accent = cutefish::ui::Color::rgb(0x3385FF);
+    properdesktop::ui::Color m_accent = properdesktop::ui::Color::rgb(0x3385FF);
     SyntaxTheme m_theme;
     double m_sidePadding = 12;
     double m_occludedLeft = 0;
@@ -267,15 +267,15 @@ private:
     std::unordered_map<uint32_t, std::unique_ptr<LineCache>> m_caches;
     // Long lines just edited: their unchanged segments are reused.
     std::unordered_map<uint32_t, std::unique_ptr<LineCache>> m_staleCaches;
-    cutefish::base::Timer m_exactTimer;
+    properdesktop::base::Timer m_exactTimer;
     int m_exactCursor = 0;
 
     bool m_planned = false;
     std::vector<PlannedLine> m_plan;
     std::unordered_map<int, std::unique_ptr<CodeLayout>> m_numberLayouts;
     std::vector<Rect> m_underlay;
-    cutefish::ui::RectF m_caret;
-    cutefish::ui::RectF m_dropCaret;
+    properdesktop::ui::RectF m_caret;
+    properdesktop::ui::RectF m_dropCaret;
     int m_currentLineNumber = -1;
 
     // The x the cursor keeps while moving up and down.
@@ -285,24 +285,24 @@ private:
     int m_preeditCursor = 0;
 
     bool m_caretVisible = true;
-    cutefish::base::Timer m_blinkTimer;
-    cutefish::base::ElapsedTimer m_blinkStarted;
-    cutefish::base::Timer m_autoScrollTimer;
-    cutefish::ui::PointF m_lastMouse;
+    properdesktop::base::Timer m_blinkTimer;
+    properdesktop::base::ElapsedTimer m_blinkStarted;
+    properdesktop::base::Timer m_autoScrollTimer;
+    properdesktop::ui::PointF m_lastMouse;
     bool m_selecting = false;
     int m_selectUnit = 0;
     TextRange m_unitAnchor;
-    cutefish::ui::PointF m_pressPos;
+    properdesktop::ui::PointF m_pressPos;
     bool m_maybeDrag = false;
     bool m_dragging = false;
-    cutefish::base::Timer m_primaryTimer;
+    properdesktop::base::Timer m_primaryTimer;
     double m_pinch = 1;
     double m_pinchAccumulated = 0;
 
     std::unique_ptr<ScrollTarget> m_scrollTarget;
-    std::unique_ptr<cutefish::ui::Scroller> m_scroller;
-    cutefish::ui::ScrollBar *m_verticalBar;
-    cutefish::ui::ScrollBar *m_horizontalBar;
+    std::unique_ptr<properdesktop::ui::Scroller> m_scroller;
+    properdesktop::ui::ScrollBar *m_verticalBar;
+    properdesktop::ui::ScrollBar *m_horizontalBar;
     // Clipboard and drop answers come from other clients, maybe after the view is gone.
     std::shared_ptr<bool> m_alive = std::make_shared<bool>(true);
 };

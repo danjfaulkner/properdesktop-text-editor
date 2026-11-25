@@ -1,6 +1,6 @@
 # Text Editor
 
-A simple text editor for Cutefish Desktop, made for quick edits such as a
+A simple text editor for Proper Desktop, made for quick edits such as a
 configuration file or a note. It has tabs, find and replace, encoding
 detection and syntax highlighting for common languages, and is not meant to
 replace a code editor.
@@ -9,7 +9,7 @@ replace a code editor.
 
 ## Dependencies
 
-cutefish-toolkit, ICU and PCRE2; GoogleTest for the tests.
+properdesktop-toolkit, ICU and PCRE2; GoogleTest for the tests.
 
 ```shell
 sudo apt install cmake libicu-dev libpcre2-dev libgtest-dev

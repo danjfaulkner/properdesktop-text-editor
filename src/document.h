@@ -230,32 +230,32 @@ public:
 
     static void setRecentFilesHook(std::function<void(const std::string &)> hook);
 
-    cutefish::base::Signal<> titleChanged;
-    cutefish::base::Signal<> filePathChanged;
-    cutefish::base::Signal<> modifiedChanged;
-    cutefish::base::Signal<> loadingChanged;
-    cutefish::base::Signal<> loadProgressChanged;
-    cutefish::base::Signal<> lockedChanged;
-    cutefish::base::Signal<> writableChanged;
-    cutefish::base::Signal<> encodingChanged;
-    cutefish::base::Signal<> lineEndingChanged;
-    cutefish::base::Signal<> languageChanged;
-    cutefish::base::Signal<> largeChanged;
-    cutefish::base::Signal<> indentationChanged;
-    cutefish::base::Signal<> undoChanged;
-    cutefish::base::Signal<> cursorChanged;
-    cutefish::base::Signal<> noticeChanged;
-    cutefish::base::Signal<> searchChanged;
-    cutefish::base::Signal<> matchesChanged;
+    properdesktop::base::Signal<> titleChanged;
+    properdesktop::base::Signal<> filePathChanged;
+    properdesktop::base::Signal<> modifiedChanged;
+    properdesktop::base::Signal<> loadingChanged;
+    properdesktop::base::Signal<> loadProgressChanged;
+    properdesktop::base::Signal<> lockedChanged;
+    properdesktop::base::Signal<> writableChanged;
+    properdesktop::base::Signal<> encodingChanged;
+    properdesktop::base::Signal<> lineEndingChanged;
+    properdesktop::base::Signal<> languageChanged;
+    properdesktop::base::Signal<> largeChanged;
+    properdesktop::base::Signal<> indentationChanged;
+    properdesktop::base::Signal<> undoChanged;
+    properdesktop::base::Signal<> cursorChanged;
+    properdesktop::base::Signal<> noticeChanged;
+    properdesktop::base::Signal<> searchChanged;
+    properdesktop::base::Signal<> matchesChanged;
     // Lines [line, line + removed) became [line, line + added).
-    cutefish::base::Signal<int, int, int> linesChanged;
-    cutefish::base::Signal<> contentsChanged;
+    properdesktop::base::Signal<int, int, int> linesChanged;
+    properdesktop::base::Signal<> contentsChanged;
     // The entering highlight state of lines [first, last] changed.
-    cutefish::base::Signal<int, int> syntaxChanged;
+    properdesktop::base::Signal<int, int> syntaxChanged;
     // A view should scroll the cursor into view.
-    cutefish::base::Signal<> revealCursor;
-    cutefish::base::Signal<> loaded;
-    cutefish::base::Signal<> saved;
+    properdesktop::base::Signal<> revealCursor;
+    properdesktop::base::Signal<> loaded;
+    properdesktop::base::Signal<> saved;
 
 private:
     void applyStep(const EditStep &step, bool reverse);
@@ -312,24 +312,24 @@ private:
     int m_matchCount = 0;
     int m_matchIndex = 0;
     bool m_wrapped = false;
-    cutefish::base::Timer m_matchTimer;
+    properdesktop::base::Timer m_matchTimer;
 
     SyntaxStates m_states;
     int m_highlightTarget = 0;
-    cutefish::base::Timer m_highlightTimer;
+    properdesktop::base::Timer m_highlightTimer;
 
-    cutefish::base::FileWatch m_watch;
+    properdesktop::base::FileWatch m_watch;
     std::string m_watchedFile;
     // What the buffer started from: the file as loaded, saved or kept over.
     DiskStamp m_diskStamp;
     // A newer file the ChangedOnDisk notice was raised for.
     DiskStamp m_changedStamp;
-    cutefish::base::Timer m_diskCheckTimer;
+    properdesktop::base::Timer m_diskCheckTimer;
 
-    cutefish::base::Job m_loadJob;
+    properdesktop::base::Job m_loadJob;
     std::shared_ptr<std::atomic<int>> m_loadProgressShared;
     std::shared_ptr<std::atomic<bool>> m_loadCancel;
-    cutefish::base::Timer m_progressTimer;
+    properdesktop::base::Timer m_progressTimer;
     // A reload keeps the cursor and scroll position.
     bool m_reloading = false;
     TextPosition m_reloadCursor;

@@ -9,7 +9,7 @@
 #include <string>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class DialogWindow;
 class Window;
 }
@@ -22,12 +22,12 @@ class EditorPage;
 class SaveChangesDialog
 {
 public:
-    explicit SaveChangesDialog(cutefish::ui::Window *parent);
+    explicit SaveChangesDialog(properdesktop::ui::Window *parent);
     ~SaveChangesDialog();
 
     void ask(const std::vector<EditorPage *> &pages, std::function<void()> then);
     bool isOpen() const { return m_window != nullptr; }
-    cutefish::ui::Window *window() const { return m_window.get(); }
+    properdesktop::ui::Window *window() const { return m_window.get(); }
     // The question in the language of the moment, its answers so far kept.
     void retranslate();
 
@@ -44,8 +44,8 @@ private:
     // Expired once the page is closed, which another window may do meanwhile.
     std::weak_ptr<bool> lifetimeOf(const EditorPage *page) const;
 
-    cutefish::ui::Window *m_parent;
-    std::unique_ptr<cutefish::ui::Window> m_window;
+    properdesktop::ui::Window *m_parent;
+    std::unique_ptr<properdesktop::ui::Window> m_window;
     std::vector<EditorPage *> m_pages;
     std::vector<std::weak_ptr<bool>> m_lifetimes;
     std::vector<EditorPage *> m_checked;
@@ -57,18 +57,18 @@ private:
 class PreferencesDialog
 {
 public:
-    PreferencesDialog(cutefish::ui::Window *parent, EditorApplication &application);
+    PreferencesDialog(properdesktop::ui::Window *parent, EditorApplication &application);
     ~PreferencesDialog();
 
     void show();
-    cutefish::ui::Window *window() const;
+    properdesktop::ui::Window *window() const;
 
 private:
     class Content;
 
-    cutefish::ui::Window *m_parent;
+    properdesktop::ui::Window *m_parent;
     EditorApplication &m_application;
-    std::unique_ptr<cutefish::ui::DialogWindow> m_dialog;
+    std::unique_ptr<properdesktop::ui::DialogWindow> m_dialog;
 };
 
 #endif

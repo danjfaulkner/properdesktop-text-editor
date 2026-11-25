@@ -17,7 +17,7 @@
 #include <cstdio>
 #include <filesystem>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 
 namespace
 {
@@ -48,11 +48,11 @@ struct Fixture
 static std::string writeFile(const std::string &name, std::string_view data)
 {
     const std::string path = TestSupport::directory() + "/" + name;
-    cutefish::base::file::writeAtomically(path, data);
+    properdesktop::base::file::writeAtomically(path, data);
     return path;
 }
 
-static double ms(const cutefish::base::ElapsedTimer &timer)
+static double ms(const properdesktop::base::ElapsedTimer &timer)
 {
     return std::chrono::duration<double, std::milli>(timer.elapsed()).count();
 }
@@ -110,7 +110,7 @@ TEST(ViewTest, LargeFilePerformance)
     const std::string path = writeFile("large.c", data);
 
     Fixture f;
-    cutefish::base::ElapsedTimer timer;
+    properdesktop::base::ElapsedTimer timer;
     timer.start();
     f.document.load(path);
     ASSERT_TRUE(f.document.waitForLoaded(60000));
@@ -173,7 +173,7 @@ TEST(ViewTest, LongLinePerformance)
     Fixture f;
     f.document.load(path);
     ASSERT_TRUE(f.document.waitForLoaded(60000));
-    cutefish::base::ElapsedTimer timer;
+    properdesktop::base::ElapsedTimer timer;
     timer.start();
     f.window.grab();
     const double firstMs = ms(timer);

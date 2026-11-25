@@ -28,7 +28,7 @@
 #include <set>
 #include <thread>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 namespace fs = std::filesystem;
 
 static std::string s_samples;
@@ -39,7 +39,7 @@ static std::set<std::string> s_only;
 
 static void spin(int ms)
 {
-    cutefish::base::EventLoop &loop = cutefish::ui::Application::instance()->loop();
+    properdesktop::base::EventLoop &loop = properdesktop::ui::Application::instance()->loop();
     const auto end = std::chrono::steady_clock::now() + std::chrono::milliseconds(ms);
     while (std::chrono::steady_clock::now() < end) {
         pollfd descriptor{loop.fd(), POLLIN, 0};
@@ -65,7 +65,7 @@ static void save(Window &window, const std::string &state)
 static void savePopups(Window &parent, const std::string &state)
 {
     int index = 0;
-    for (Window *window : cutefish::ui::Application::instance()->windows()) {
+    for (Window *window : properdesktop::ui::Application::instance()->windows()) {
         if (window == &parent || window->isHidden())
             continue;
         const std::string path = s_out + "/" + state + "-" + s_suffix + ".popup" + std::to_string(index++) + ".png";
@@ -93,7 +93,7 @@ static void writeSettings(const std::string &path, const std::vector<std::pair<s
         const size_t end = text.find('\n', at);
         text.replace(at, end - at, key + "=" + value);
     }
-    cutefish::base::file::writeAtomically(path, text);
+    properdesktop::base::file::writeAtomically(path, text);
 }
 
 struct Run
@@ -143,10 +143,10 @@ int main(int argc, char **argv)
     for (int i = 5; i < argc; ++i)
         s_only.insert(argv[i]);
 
-    cutefish::ui::Application app(argc, argv, cutefish::ui::Application::Platform::Headless);
-    app.setApplicationId("cutefish-text-editor");
+    properdesktop::ui::Application app(argc, argv, properdesktop::ui::Application::Platform::Headless);
+    app.setApplicationId("properdesktop-text-editor");
     Theme::setCurrent(dark ? Theme::dark() : Theme::light());
-    cutefish::base::file::TemporaryDirectory scratch(fs::temp_directory_path().string(), "text-editor-capture");
+    properdesktop::base::file::TemporaryDirectory scratch(fs::temp_directory_path().string(), "text-editor-capture");
     const std::string root = scratch.path();
     fs::create_directories(s_out);
 

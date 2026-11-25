@@ -34,12 +34,12 @@
 #include <cmath>
 #include <filesystem>
 
-using namespace cutefish::ui;
-using cutefish::i18n::tr;
-namespace strings = cutefish::base::strings;
+using namespace properdesktop::ui;
+using properdesktop::i18n::tr;
+namespace strings = properdesktop::base::strings;
 
 static constexpr double headerHeight = 40;
-static constexpr const char *tabMimeType = "application/x-cutefish-text-editor-tab";
+static constexpr const char *tabMimeType = "application/x-properdesktop-text-editor-tab";
 
 // The header above the tabs' pages, the current one shown.
 class EditorWindow::Content : public View
@@ -158,7 +158,7 @@ protected:
                     const std::string_view url = strings::trimmed(line);
                     if (url.empty() || url[0] == '#')
                         continue;
-                    if (const std::optional<std::string> path = cutefish::base::url::toLocalFile(url))
+                    if (const std::optional<std::string> path = properdesktop::base::url::toLocalFile(url))
                         paths.push_back(*path);
                 }
                 window->openPaths(paths);
@@ -312,7 +312,7 @@ EditorWindow::EditorWindow(EditorApplication &application, Options options)
         }
         // Later, not from inside the tab bar's handler: taking the tab out
         // removes the tab it runs in.
-        cutefish::base::EventLoop::current()->post([this, index, position, alive = std::weak_ptr<bool>(m_alive)] {
+        properdesktop::base::EventLoop::current()->post([this, index, position, alive = std::weak_ptr<bool>(m_alive)] {
             if (!alive.expired())
                 detachTab(index, position);
         });
@@ -605,7 +605,7 @@ void EditorWindow::closeTab(int index, bool ask)
     std::unique_ptr<EditorPage> taken = takePage(index);
     // The page may be the one handling this event; it goes once the event is over.
     std::shared_ptr<EditorPage> doomed(std::move(taken));
-    cutefish::base::EventLoop::current()->post([doomed] {});
+    properdesktop::base::EventLoop::current()->post([doomed] {});
     if (m_pages.empty()) {
         m_closeConfirmed = true;
         requestClose();

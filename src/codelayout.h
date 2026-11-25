@@ -13,7 +13,7 @@
 #include <string_view>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class Painter;
 }
 
@@ -22,10 +22,10 @@ class Painter;
 class CodeFont
 {
 public:
-    CodeFont(const cutefish::ui::FontSpec &font, double scale, bool hintedLayout);
+    CodeFont(const properdesktop::ui::FontSpec &font, double scale, bool hintedLayout);
     ~CodeFont();
 
-    const cutefish::ui::FontSpec &font() const { return m_font; }
+    const properdesktop::ui::FontSpec &font() const { return m_font; }
     double scale() const { return m_scale; }
     bool hintedLayout() const { return m_hintedLayout; }
 
@@ -35,10 +35,10 @@ public:
     double horizontalAdvance(std::string_view text) const;
 
 private:
-    cutefish::ui::FontSpec m_font;
+    properdesktop::ui::FontSpec m_font;
     double m_scale;
     bool m_hintedLayout;
-    std::unique_ptr<cutefish::ui::FontMetrics> m_metrics;
+    std::unique_ptr<properdesktop::ui::FontMetrics> m_metrics;
     double m_height = 0;
     double m_ascent = 0;
 };
@@ -53,7 +53,7 @@ public:
     {
         int start = 0;
         int length = 0;
-        cutefish::ui::Color color;
+        properdesktop::ui::Color color;
         bool bold = false;
         bool italic = false;
         bool underline = false;
@@ -103,15 +103,15 @@ public:
 
     // Every line at its position from the origin, the text in the default
     // colour where no format colours it.
-    void draw(cutefish::ui::Painter &painter, cutefish::ui::PointF origin, cutefish::ui::Color color) const;
+    void draw(properdesktop::ui::Painter &painter, properdesktop::ui::PointF origin, properdesktop::ui::Color color) const;
 
 private:
     std::shared_ptr<CodeFont> m_font;
     // Drawing caches glyphs in it.
-    mutable cutefish::ui::TextLayout m_layout;
+    mutable properdesktop::ui::TextLayout m_layout;
     std::vector<Line> m_lines;
     double m_maximumWidth = 0;
-    mutable cutefish::ui::Color m_drawColor;
+    mutable properdesktop::ui::Color m_drawColor;
     mutable bool m_hasDrawColor = false;
 };
 

@@ -7,7 +7,7 @@
 
 #include <algorithm>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 
 CodeFont::CodeFont(const FontSpec &font, double scale, bool hintedLayout)
     : m_font(font)

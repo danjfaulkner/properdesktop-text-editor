@@ -14,7 +14,7 @@
 
 #include <cmath>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 
 RoundButton::RoundButton(double size)
     : m_size(size)

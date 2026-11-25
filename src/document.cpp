@@ -23,10 +23,10 @@
 #include <unistd.h>
 
 using namespace std::chrono_literals;
-using cutefish::i18n::format;
-using cutefish::i18n::tr;
+using properdesktop::i18n::format;
+using properdesktop::i18n::tr;
 namespace fs = std::filesystem;
-namespace strings = cutefish::base::strings;
+namespace strings = properdesktop::base::strings;
 
 struct LoadResult
 {
@@ -199,7 +199,7 @@ Syntax::State SyntaxStates::before(int line) const
 
 int SyntaxStates::advance(const TextBuffer &buffer, int line, int64_t budgetMs, int *last)
 {
-    cutefish::base::ElapsedTimer timer;
+    properdesktop::base::ElapsedTimer timer;
     timer.start();
     const int target = std::min(line, buffer.lineCount() - 1);
     int first = -1;
@@ -301,7 +301,7 @@ std::string Document::folder() const
     if (m_filePath.empty())
         return std::string();
     std::string dir = parentOf(m_filePath);
-    const std::string home = cutefish::base::paths::home();
+    const std::string home = properdesktop::base::paths::home();
     if (dir == home || strings::startsWith(dir, home + "/"))
         dir.replace(0, home.size(), "~");
     return dir;
@@ -327,7 +327,7 @@ void Document::watchFile()
     m_watch.reset();
     m_watchedFile = m_filePath;
     if (!m_watchedFile.empty())
-        m_watch = cutefish::base::FileWatch::file(m_watchedFile, [this] { m_diskCheckTimer.start(); });
+        m_watch = properdesktop::base::FileWatch::file(m_watchedFile, [this] { m_diskCheckTimer.start(); });
 }
 
 void Document::updateWritable()
@@ -353,7 +353,7 @@ void Document::load(const std::string &path, const std::string &encoding)
 
     m_loadProgressShared = std::make_shared<std::atomic<int>>(0);
     m_loadCancel = std::make_shared<std::atomic<bool>>(false);
-    m_loadJob = cutefish::base::runInThread(
+    m_loadJob = properdesktop::base::runInThread(
             [path = m_filePath, encoding, progress = m_loadProgressShared, cancel = m_loadCancel] {
                 return std::make_shared<LoadResult>(readFile(path, encoding, progress, cancel));
             },
@@ -366,8 +366,8 @@ void Document::load(const std::string &path, const std::string &encoding)
 
 bool Document::waitForLoaded(int timeoutMs)
 {
-    cutefish::base::EventLoop *loop = cutefish::base::EventLoop::current();
-    cutefish::base::ElapsedTimer timer;
+    properdesktop::base::EventLoop *loop = properdesktop::base::EventLoop::current();
+    properdesktop::base::ElapsedTimer timer;
     timer.start();
     while (m_loading && loop && timer.elapsedMs() < timeoutMs) {
         pollfd descriptor{loop->fd(), POLLIN, 0};
@@ -1363,7 +1363,7 @@ bool Document::saveAsUtf8()
 // umask() can only be read by changing it, which races with other threads.
 static mode_t currentUmask()
 {
-    const std::optional<std::string> status = cutefish::base::file::read("/proc/self/status");
+    const std::optional<std::string> status = properdesktop::base::file::read("/proc/self/status");
     const size_t start = status ? status->find("Umask:\t") : std::string::npos;
     if (start == std::string::npos)
         return 022;

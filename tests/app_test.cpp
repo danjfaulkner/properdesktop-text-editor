@@ -27,13 +27,13 @@
 #include <cstdio>
 #include <filesystem>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 namespace fs = std::filesystem;
 
 static std::string writeFile(const std::string &name, std::string_view data)
 {
     const std::string path = TestSupport::directory() + "/" + name;
-    cutefish::base::file::writeAtomically(path, data);
+    properdesktop::base::file::writeAtomically(path, data);
     return path;
 }
 
@@ -89,7 +89,7 @@ protected:
 // The shown window that is none of the editor's: the dialog asking about unsaved changes.
 static Window *openDialog(EditorApplication &application)
 {
-    for (Window *window : cutefish::ui::Application::instance()->windows()) {
+    for (Window *window : properdesktop::ui::Application::instance()->windows()) {
         if (window->isHidden())
             continue;
         const std::vector<EditorWindow *> windows = application.windows();
@@ -101,7 +101,7 @@ static Window *openDialog(EditorApplication &application)
 
 static std::string readFile(const std::string &path)
 {
-    return cutefish::base::file::read(path).value_or(std::string());
+    return properdesktop::base::file::read(path).value_or(std::string());
 }
 
 // Answers the dialog asking about unsaved changes with Return: Save.
@@ -519,7 +519,7 @@ TEST_F(AppTest, LargeFilePerformance)
     const std::string path = writeFile("large.c", data);
     EditorWindow *window = start({});
     ASSERT_TRUE(window);
-    cutefish::base::ElapsedTimer timer;
+    properdesktop::base::ElapsedTimer timer;
     timer.start();
     m_app->openPaths({path});
     EditorView *view = editor(window);
@@ -646,7 +646,7 @@ TEST_F(AppTest, LanguageChangeKeepsTheDocuments)
     page->statusBar().setName("oldStatusBar");
     const EditorView *view = &page->editor();
 
-    cutefish::ui::Application::instance()->languageChanged.emit();
+    properdesktop::ui::Application::instance()->languageChanged.emit();
     frame(window);
     ASSERT_EQ(window->tabCount(), 2);
     EXPECT_EQ(window->pages().front(), page);

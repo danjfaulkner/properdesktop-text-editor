@@ -16,7 +16,7 @@
 #include <utility>
 #include <vector>
 
-namespace cutefish::base::dbus {
+namespace properdesktop::base::dbus {
 class Object;
 }
 
@@ -73,10 +73,10 @@ public:
     void open(const std::vector<std::string> &arguments, const std::string &workingDirectory);
     void openText(const std::string &text);
     void newWindowFromBus();
-    // Registers org.cutefish.TextEditor; false when another process has it.
+    // Registers org.properdesktop.TextEditor; false when another process has it.
     bool registerService();
 
-    cutefish::base::Signal<> windowCountChanged;
+    properdesktop::base::Signal<> windowCountChanged;
 
 private:
     EditorWindow *targetWindow(EditorWindow *preferred = nullptr);
@@ -88,7 +88,7 @@ private:
     std::vector<EditorWindow *> m_order;
     EditorWindow *m_lastActive = nullptr;
     bool m_quitting = false;
-    std::unique_ptr<cutefish::base::dbus::Object> m_service;
+    std::unique_ptr<properdesktop::base::dbus::Object> m_service;
 };
 
 #endif

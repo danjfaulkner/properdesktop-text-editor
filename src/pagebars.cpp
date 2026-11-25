@@ -23,13 +23,13 @@
 
 #include <cmath>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 using namespace std::chrono_literals;
-using cutefish::i18n::format;
-using cutefish::i18n::tr;
-using cutefish::i18n::trn;
-using cutefish::i18n::trNoop;
-namespace strings = cutefish::base::strings;
+using properdesktop::i18n::format;
+using properdesktop::i18n::tr;
+using properdesktop::i18n::trn;
+using properdesktop::i18n::trNoop;
+namespace strings = properdesktop::base::strings;
 
 static const char *const lineEndingShortNames[] = {"LF", "CRLF", "CR"};
 

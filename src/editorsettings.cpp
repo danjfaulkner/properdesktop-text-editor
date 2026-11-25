@@ -8,7 +8,7 @@
 
 #include <algorithm>
 
-using cutefish::base::Settings;
+using properdesktop::base::Settings;
 
 EditorSettings::EditorSettings(std::string path)
     : m_path(std::move(path))
@@ -32,7 +32,7 @@ EditorSettings::EditorSettings(std::string path)
 
 std::string EditorSettings::defaultPath()
 {
-    return cutefish::base::paths::cutefishConfig("text-editor");
+    return properdesktop::base::paths::properdesktopConfig("text-editor");
 }
 
 void EditorSettings::commit()

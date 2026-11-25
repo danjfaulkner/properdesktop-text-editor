@@ -15,7 +15,7 @@
 #include <string>
 #include <vector>
 
-namespace cutefish::ui {
+namespace properdesktop::ui {
 class ConfirmDialog;
 class Menu;
 }
@@ -30,7 +30,7 @@ class LoadingView;
 class StatusBar;
 
 // One tab: a document, the bars that belong to it and its view.
-class EditorPage : public cutefish::ui::View
+class EditorPage : public properdesktop::ui::View
 {
 public:
     // How the tab starts: a file or text from standard input.
@@ -63,7 +63,7 @@ public:
     void setEncodingForReload(const std::string &encoding);
     void showEncodingMenu();
     void revert();
-    void popupContextMenu(cutefish::ui::PointF position);
+    void popupContextMenu(properdesktop::ui::PointF position);
     // Follows the preferences, the theme and the window's zoom.
     void applySettings();
     // The bars and an open question take the language of the moment; the
@@ -72,7 +72,7 @@ public:
     // Puts the cards in their corner and tells the view what they cover.
     void placeCards();
     // The card floating over the text, if one is open.
-    cutefish::ui::View *card() const;
+    properdesktop::ui::View *card() const;
     FindBar *findBarIfMade() const { return m_findBar; }
     GoToLineBar *goToLineIfMade() const { return m_goToLine; }
     StatusBar &statusBar() const { return *m_statusBar; }
@@ -81,11 +81,11 @@ public:
     std::weak_ptr<bool> lifetime() const { return m_alive; }
 
     // The title or the modified state changed.
-    cutefish::base::Signal<> tabChanged;
+    properdesktop::base::Signal<> tabChanged;
 
 protected:
     void layout() override;
-    void paint(cutefish::ui::Painter &painter) override;
+    void paint(properdesktop::ui::Painter &painter) override;
 
 private:
     class EditorArea;
@@ -100,7 +100,7 @@ private:
     EditorApplication &m_application;
     EditorWindow *m_window;
     std::unique_ptr<Document> m_document;
-    std::vector<cutefish::base::Subscription> m_connections;
+    std::vector<properdesktop::base::Subscription> m_connections;
     InfoBar *m_infoBar;
     EditorArea *m_area;
     EditorView *m_editor;
@@ -109,11 +109,11 @@ private:
     // Made on first use.
     FindBar *m_findBar = nullptr;
     GoToLineBar *m_goToLine = nullptr;
-    std::unique_ptr<cutefish::ui::Menu> m_contextMenu;
-    std::unique_ptr<cutefish::ui::ConfirmDialog> m_reloadConfirm;
+    std::unique_ptr<properdesktop::ui::Menu> m_contextMenu;
+    std::unique_ptr<properdesktop::ui::ConfirmDialog> m_reloadConfirm;
     std::string m_reloadEncoding;
     // A file that takes a moment shows its progress; a quick one shows nothing.
-    cutefish::base::Timer m_loadingDelay;
+    properdesktop::base::Timer m_loadingDelay;
 
     // The line (from 0) the cursor goes to once the file is loaded.
     std::optional<int> m_pendingLine;

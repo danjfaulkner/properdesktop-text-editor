@@ -3,7 +3,7 @@
 
 #include "syntaxtheme.h"
 
-using cutefish::ui::Color;
+using properdesktop::ui::Color;
 
 struct Palette
 {

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: cutefish-text-editor\n"
-"Report-Msgid-Bugs-To: https://github.com/cutefishos\n"
+"Project-Id-Version: properdesktop-text-editor\n"
+"Report-Msgid-Bugs-To: https://github.com/danjfaulkner\n"
 "POT-Creation-Date: 2026-11-18 15:15+0800\n"
 "PO-Revision-Date: 2026-11-13 15:22+0800\n"
 "Last-Translator: \n"
@@ -168,7 +168,7 @@ msgstr "删除"
 msgid "Select All"
 msgstr "全选"
 
-#: src/editorwindow.cpp cutefish-text-editor.desktop
+#: src/editorwindow.cpp properdesktop-text-editor.desktop
 msgid "Text Editor"
 msgstr "文本编辑器"
 
@@ -204,7 +204,7 @@ msgstr "文件"
 msgid "New Tab"
 msgstr "新建标签页"
 
-#: src/editorwindow.cpp cutefish-text-editor.desktop
+#: src/editorwindow.cpp properdesktop-text-editor.desktop
 msgid "New Window"
 msgstr "新建窗口"
 
@@ -682,10 +682,10 @@ msgstr "越南文 (Windows-1258)"
 msgid "Thai (Windows-874)"
 msgstr "泰文 (Windows-874)"
 
-#: cutefish-text-editor.desktop
+#: properdesktop-text-editor.desktop
 msgid "Edit plain text files"
 msgstr "编辑纯文本文件"
 
-#: cutefish-text-editor.desktop
+#: properdesktop-text-editor.desktop
 msgid "Text;Editor;Plain;Notes;Code;"
 msgstr "Text;Editor;Plain;Notes;Code;文本;编辑器;纯文本;笔记;代码;记事本;"

@@ -9,7 +9,7 @@
 #include <string>
 
 // The editor's preferences, one instance for the process and every window,
-// kept under [Editor] in ~/.config/cutefish/text-editor.conf.
+// kept under [Editor] in ~/.config/properdesktop/text-editor.conf.
 class EditorSettings
 {
 public:
@@ -39,7 +39,7 @@ public:
     // Writes the values and tells every window.
     void commit();
 
-    cutefish::base::Signal<> changed;
+    properdesktop::base::Signal<> changed;
 
 private:
     std::string m_path;

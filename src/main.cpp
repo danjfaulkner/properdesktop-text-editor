@@ -17,11 +17,11 @@
 #define TEXT_EDITOR_VERSION "1.0"
 #endif
 
-namespace dbus = cutefish::base::dbus;
+namespace dbus = properdesktop::base::dbus;
 
 static void printHelp(const char *program)
 {
-    std::printf("Usage: %s [options] [+LINE] [FILE...] [-]\nCutefish Text Editor\n\nOptions:\n"
+    std::printf("Usage: %s [options] [+LINE] [FILE...] [-]\nProperDesktop Text Editor\n\nOptions:\n"
                 "  -h, --help     Displays help on commandline options.\n"
                 "  --help-all     Displays help.\n"
                 "  -v, --version  Displays version information.\n"
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
             return 0;
         }
         if (argument == "-v" || argument == "--version") {
-            std::printf("cutefish-text-editor %s\n", TEXT_EDITOR_VERSION);
+            std::printf("properdesktop-text-editor %s\n", TEXT_EDITOR_VERSION);
             return 0;
         }
         if (argument == "--new-window") {
@@ -78,13 +78,13 @@ int main(int argc, char **argv)
     if (readInput)
         standardInput = std::string(std::istreambuf_iterator<char>(std::cin), std::istreambuf_iterator<char>());
 
-    cutefish::ui::Application app(argc, argv);
+    properdesktop::ui::Application app(argc, argv);
 #ifdef TEXT_EDITOR_LIVE_TEST
-    app.setApplicationId("cutefish-text-editor-live");
+    app.setApplicationId("properdesktop-text-editor-live");
 #else
-    app.setApplicationId("cutefish-text-editor");
+    app.setApplicationId("properdesktop-text-editor");
 #endif
-    cutefish::i18n::setDomain("cutefish-text-editor");
+    properdesktop::i18n::setDomain("properdesktop-text-editor");
 
     std::error_code error;
     const std::string workingDirectory = std::filesystem::current_path(error).string();
@@ -99,8 +99,8 @@ int main(int argc, char **argv)
     if (!application.registerService()) {
 #endif
         // A running editor takes the files and this process ends.
-        dbus::Proxy existing(dbus::Connection::session(), "org.cutefish.TextEditor", "/TextEditor",
-                             "org.cutefish.TextEditor");
+        dbus::Proxy existing(dbus::Connection::session(), "org.properdesktop.TextEditor", "/TextEditor",
+                             "org.properdesktop.TextEditor");
         existing.setTimeout(std::chrono::seconds(5));
         if (newWindow)
             existing.call("NewWindow");

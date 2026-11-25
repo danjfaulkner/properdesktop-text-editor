@@ -17,7 +17,7 @@
 #include <cmath>
 #include <unordered_set>
 
-using namespace cutefish::ui;
+using namespace properdesktop::ui;
 using namespace std::chrono_literals;
 
 // A line longer than this is laid out in pieces, and always wrapped.
@@ -478,7 +478,7 @@ void EditorView::computeExactHeights()
 {
     if (!m_document || !m_wordWrap || geometry().width <= 0)
         return;
-    cutefish::base::ElapsedTimer timer;
+    properdesktop::base::ElapsedTimer timer;
     timer.start();
     ensureIndex();
     int anchorOffset = 0;
@@ -1894,11 +1894,11 @@ uint32_t EditorView::drop(const DragEvent &event)
             if (alive.expired())
                 return;
             std::vector<std::string> paths;
-            for (const std::string &line : cutefish::base::strings::split(data, '\n')) {
-                const std::string_view url = cutefish::base::strings::trimmed(line);
+            for (const std::string &line : properdesktop::base::strings::split(data, '\n')) {
+                const std::string_view url = properdesktop::base::strings::trimmed(line);
                 if (url.empty() || url[0] == '#')
                     continue;
-                if (const std::optional<std::string> path = cutefish::base::url::toLocalFile(url))
+                if (const std::optional<std::string> path = properdesktop::base::url::toLocalFile(url))
                     paths.push_back(*path);
             }
             if (!paths.empty() && onFilesDropped)
